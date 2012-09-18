@@ -15,5 +15,5 @@ Suggests:
     testthat,
     roxygen2
 Collate:
-    'DBIextras-package.r'
     'db.R'
+    'DBIextras-package.R'

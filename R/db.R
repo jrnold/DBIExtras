@@ -58,7 +58,6 @@ setReplaceMethod("$", signature(x="DBIConnection",value="ANY"),
                      dbWriteTable(x, name, value)
                      x
                  })
-
 ##' @name $
 ##' @docType methods
 ##' @rdname DBIConnection-methods
@@ -70,19 +69,55 @@ setReplaceMethod("$", signature(x="DBIConnection", value="NULL"),
                      x
                  })
 
-## setMethod("[", c("DBIConnection", "character", "missing"),
-##           function(x, i, j, ...) {
-##               lapply(i, function(table) dbReadTable(x, i),
-##                      simplify=FALSE, USE.NAMES=TRUE)
-##           })
+################################33
+##' @export
+setMethod("[", c("DBIConnection", "character", "missing"),
+          function(x, i, j, ...) {
+              structure(lapply(i, function(table) dbReadTable(x, i)),
+                        names=i)
+              x
+          })
 
-## setMethod("[<-", c("DBIConnection", "character", "missing", "ANY"),
-##           function(x, i, j, ..., value) {
-##               ## Check?
-##               for (table in i) {
-##                   dbWriteTable(x, table, value, ...)
-##               }
-##           })
+##' @export
+setReplaceMethod("[", c("DBIConnection", "character", "missing", "ANY"),
+          function(x, i, j, ..., value) {
+              for (idx in seq_along(i)) {
+                  dbWriteTable(x, i[idx], value, ...)
+              }
+              x
+          })
+
+##' @export
+setReplaceMethod("[", c("DBIConnection", "character", "missing", "data.frame"),
+          function(x, i, j, ..., value) {
+              for (idx in seq_along(i)) {
+                  dbWriteTable(x, i[idx], value, ...)
+              }
+              x
+          })
+
+##' @export
+setReplaceMethod("[", c("DBIConnection", "character", "missing", "list"),
+          function(x, i, j, ..., value) {
+              if (length(i) != length(value)) {
+                  stop("length(i) != length(value)")
+              }
+              for (idx in seq_along(i)) {
+                  dbWriteTable(x, i[idx], value[idx], ...)
+              }
+              x
+          })
+
+##' @export
+setReplaceMethod("[", c("DBIConnection", "character", "missing", "NULL"),
+          function(x, i, j, ..., value) {
+              for (table in i) {
+                  dbDeleteTable(x, table, ...)
+              }
+              x
+          })
+
+###########################################
 
 ##' @name show
 ##' @docType methods
