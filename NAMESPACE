@@ -1,6 +1,7 @@
 export("$")
 export("[[")
 exportMethods("$")
+exportMethods("[")
 exportMethods("[[")
 exportMethods(dbDisconnect)
 exportMethods(length)
