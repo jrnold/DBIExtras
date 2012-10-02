@@ -5,7 +5,9 @@
 \alias{dbDisconnect,character-method}
 \title{DBIDriver methods}
 \description{
-  DBIDriver methods
+  For signature \code{DBIDriver} disconnect all
+  connections. For signature \code{character}, coerce the
+  character into \code{DBIDriver} and run generic.
 
   Character methods
 }
