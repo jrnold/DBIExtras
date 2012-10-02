@@ -1,7 +1,12 @@
 ##' @export
-setGeneric("length")
+setGeneric("length", base::length)
 ##' @export
-setGeneric("names")
+setGeneric("names", base::names)
+
+##' @exportMethod [[
+##' @exportMethod [
+##' @exportMethod $
+
 
 ##' DBIConnection Generics
 ##'
@@ -10,7 +15,6 @@ setGeneric("names")
 ##' @docType methods
 ##' @rdname DBIConnection-methods
 ##' @aliases [[,DBIConnection,character,missing-method
-##' @export
 setMethod("[[", c("DBIConnection", "character", "missing"),
           function(x, i, j, ...) {
               dbReadTable(x, i, ...)
@@ -22,7 +26,6 @@ setMethod("[[", c("DBIConnection", "character", "missing"),
 ##' @docType methods
 ##' @rdname DBIConnection-methods
 ##' @aliases [[<-,DBIConnection,character,missing,ANY-method
-##' @export
 setReplaceMethod("[[", c("DBIConnection", "character", "missing", "ANY"),
           function(x, i, j, ..., value) {
               dbWriteTable(x, i, value, ...)
@@ -33,7 +36,6 @@ setReplaceMethod("[[", c("DBIConnection", "character", "missing", "ANY"),
 ##' @docType methods
 ##' @rdname DBIConnection-methods
 ##' @aliases [[<-,DBIConnection,character,missing,NULL-method
-##' @export
 setReplaceMethod("[[", c("DBIConnection", "character", "missing", "NULL"),
           function(x, i, j, ..., value) {
               dbRemoveTable(x, i, ...)
@@ -44,7 +46,6 @@ setReplaceMethod("[[", c("DBIConnection", "character", "missing", "NULL"),
 ##' @docType methods
 ##' @rdname DBIConnection-methods
 ##' @aliases $,DBIConnection-method
-##' @export
 setMethod("$", signature(x="DBIConnection"),
           function(x, name) dbReadTable(x, name))
 
@@ -52,7 +53,6 @@ setMethod("$", signature(x="DBIConnection"),
 ##' @docType methods
 ##' @rdname DBIConnection-methods
 ##' @aliases $<-,DBIConnection,ANY-method
-##' @export
 setReplaceMethod("$", signature(x="DBIConnection",value="ANY"),
                  function(x, name, value) {
                      dbWriteTable(x, name, value)
@@ -62,7 +62,6 @@ setReplaceMethod("$", signature(x="DBIConnection",value="ANY"),
 ##' @docType methods
 ##' @rdname DBIConnection-methods
 ##' @aliases $<-,DBIConnection,NULL-method
-##' @export
 setReplaceMethod("$", signature(x="DBIConnection", value="NULL"),
                  function(x, name, value) {
                      dbRemoveTable(x, name)
@@ -145,6 +144,7 @@ setMethod("names", "DBIConnection",
 setMethod("length", "DBIConnection",
           function(x) length(dbListTables(x)))
 
+###################################################
 
 ##' DBIDriver methods
 ##'
