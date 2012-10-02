@@ -1,19 +1,21 @@
-Package: DBIextras
-Date: 2012-9-16
+Package: DBIExtras
+Date: 2012-10-2
 Title: Generic functions missing from DBI
 Authors@R: c(person("Jeffrey B.", "Arnold", role = c("aut", "cre"),
     email = "jeffrey.arnold@gmail.com"))
-Author: jrnold
+Author: Jeffrey B. Arnold <jeffrey.arnold@gmail.com>
 Maintainer: Jeffrey B. Arnold <jeffrey.arnold@gmail.com>
 Version: 1.0
 License: GPL-3
-Description: Generic functions missing from DBI
+Description: Extended functionality for DBI, including [[ and $
+    functions, and attaching the connection as an environment.
 Depends:
     methods,
     DBI
 Suggests:
     testthat,
-    roxygen2
+    roxygen2,
+    RSQLite
 Collate:
     'db.R'
     'DBIextras-package.R'

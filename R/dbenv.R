@@ -1,6 +1,10 @@
-## Code taken from filehash
+## Code slightly adapted from filehash
 ## Copyright 2012 Roger D. Peng
+
+## @export
 setGeneric("dbLoad", function(db, ...) standardGeneric("dbLoad"))
+
+## @export
 setGeneric("dbLazyLoad", function(db, ...) standardGeneric("dbLazyLoad"))
 
 setMethod("dbLoad", "DBIConnection",

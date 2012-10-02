@@ -1,12 +1,14 @@
 ##' @export
-setGeneric("length", base::length)
+setGeneric("length")
+
 ##' @export
-setGeneric("names", base::names)
+setGeneric("names")
 
+## Export all the generics here
 ##' @exportMethod [[
-##' @exportMethod [
-##' @exportMethod $
-
+##' @exportMethod "$"
+##' @exportMethod dbDisconnect
+NULL
 
 ##' DBIConnection Generics
 ##'
@@ -69,7 +71,6 @@ setReplaceMethod("$", signature(x="DBIConnection", value="NULL"),
                  })
 
 ################################33
-##' @export
 setMethod("[", c("DBIConnection", "character", "missing"),
           function(x, i, j, ...) {
               structure(lapply(i, function(table) dbReadTable(x, i)),
@@ -77,7 +78,6 @@ setMethod("[", c("DBIConnection", "character", "missing"),
               x
           })
 
-##' @export
 setReplaceMethod("[", c("DBIConnection", "character", "missing", "ANY"),
           function(x, i, j, ..., value) {
               for (idx in seq_along(i)) {
@@ -86,7 +86,6 @@ setReplaceMethod("[", c("DBIConnection", "character", "missing", "ANY"),
               x
           })
 
-##' @export
 setReplaceMethod("[", c("DBIConnection", "character", "missing", "data.frame"),
           function(x, i, j, ..., value) {
               for (idx in seq_along(i)) {
@@ -95,7 +94,6 @@ setReplaceMethod("[", c("DBIConnection", "character", "missing", "data.frame"),
               x
           })
 
-##' @export
 setReplaceMethod("[", c("DBIConnection", "character", "missing", "list"),
           function(x, i, j, ..., value) {
               if (length(i) != length(value)) {
@@ -107,7 +105,6 @@ setReplaceMethod("[", c("DBIConnection", "character", "missing", "list"),
               x
           })
 
-##' @export
 setReplaceMethod("[", c("DBIConnection", "character", "missing", "NULL"),
           function(x, i, j, ..., value) {
               for (table in i) {
@@ -150,9 +147,7 @@ setMethod("length", "DBIConnection",
 ##'
 ##' @name dbDisconnect
 ##' @docType methods
-##' @rdname DBIDriver-methods
 ##' @aliases dbDisconnect,DBIDriver-method
-##' @export
 setMethod("dbDisconnect", "DBIDriver",
           function(conn, ...) {
               all(sapply(dbListConnections(conn),
@@ -163,9 +158,7 @@ setMethod("dbDisconnect", "DBIDriver",
 ##'
 ##' @name dbDisconnect
 ##' @docType methods
-##' @rdname character-methods
 ##' @aliases dbDisconnect,character-method
-##' @export
 setMethod("dbDisconnect", "character",
           function(conn) dbDisconnect(dbDriver(conn)))
 
