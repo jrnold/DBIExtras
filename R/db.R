@@ -169,6 +169,18 @@ setMethod("names", "DBIConnection",
 setMethod("length", "DBIConnection",
           function(x) length(dbListTables(x)))
 
+##' @aliases dbClearResult,DBIConnection-method
+##' @docType methods
+##' @keywords methods
+##' @export
+setMethod("dbClearResult", c(conn="DBIConnection"),
+          function(conn) {
+              for (i in dbListResults(object)) {
+                  dbClearResults(i)
+              }
+          })
+          
+
 ###################################################
 
 ##' DBIDriver methods
