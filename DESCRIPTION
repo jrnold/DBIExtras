@@ -2,7 +2,7 @@ Package: DBIExtras
 Date: 2012-10-2
 Title: Generic functions missing from DBI
 Authors@R: c(person("Jeffrey B.", "Arnold", role = c("aut", "cre"),
-    email = "jeffrey.arnold@gmail.com")) 
+    email = "jeffrey.arnold@gmail.com"))
 Version: 1.0
 License: GPL-3
 Description: Extended functionality for DBI, including [[ and $
@@ -15,6 +15,10 @@ Suggests:
     roxygen2,
     RSQLite
 Collate:
-    'db.R'
     'DBIextras-package.R'
+    'method-dbClearResult.R'
     'dbenv.R'
+    'method-dbDisconnect.R'
+    'method-extract.R'
+    'method-length.R'
+    'method-show.R'
