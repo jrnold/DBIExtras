@@ -1,6 +1,6 @@
-Package: DBIExtras
+Package: DBImisc
 Date: 2012-10-2
-Title: Generic functions missing from DBI
+Title: Misc DBI related functions
 Authors@R: c(person("Jeffrey B.", "Arnold", role = c("aut", "cre"),
     email = "jeffrey.arnold@gmail.com"))
 Version: 1.0
